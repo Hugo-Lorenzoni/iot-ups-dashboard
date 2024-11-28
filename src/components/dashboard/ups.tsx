@@ -53,13 +53,16 @@ const chartConfig = {
 
 export function UPS() {
   return (
-    <Card className="shadow-none">
+    <Card className="flex flex-col">
       <CardHeader>
         <CardTitle>Bar Chart - Mixed</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
+      <CardContent className="grow">
+        <ChartContainer
+          config={chartConfig}
+          className="min-h-[200px] w-full h-full"
+        >
           <BarChart
             accessibilityLayer
             data={chartData}

@@ -39,15 +39,18 @@ const chartConfig = {
 
 export function DHT22() {
   return (
-    <Card className="shadow-none">
+    <Card className="flex flex-col">
       <CardHeader>
         <CardTitle>Area Chart - Stacked</CardTitle>
         <CardDescription>
           Showing total visitors for the last 6 months
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
+      <CardContent className="grow">
+        <ChartContainer
+          config={chartConfig}
+          className="min-h-[200px] w-full h-full"
+        >
           <AreaChart
             accessibilityLayer
             data={chartData}
