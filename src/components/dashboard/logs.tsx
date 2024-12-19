@@ -196,11 +196,7 @@ export function Logs() {
           Showing total visitors for the last 6 months
         </CardDescription>
       </CardHeader>
-      <ScrollArea className="rounded-md border mx-6 mb-6">
-        <CardContent className="p-0">
-          <DataTable columns={columns} data={payments} />
-        </CardContent>
-      </ScrollArea>
+      <DataTable columns={columns} data={payments} />
       <CardFooter>
         <div className="flex w-full items-start gap-2 text-sm">
           <div className="grid gap-2">
