@@ -1,9 +1,13 @@
 import { DHT22 } from "@/components/dashboard/dht22";
 import { Logs } from "@/components/dashboard/logs";
 import { UPS } from "@/components/dashboard/ups";
+import prisma from "@/lib/prisma";
 import Image from "next/image";
 
-export default function Home() {
+export default async function Home() {
+  const data = await prisma.mouvement.findMany();
+  console.log(data);
+
   return (
     <main className="h-dvh">
       <div className="grid grid-cols-[450px_1fr] gap-4 p-4 bg-muted/50 h-full w-full min-h-0">

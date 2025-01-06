@@ -1,0 +1,22 @@
+CREATE TABLE UPS (
+	id SERIAL PRIMARY KEY,
+	timest TIMESTAMP,
+	battery_pourcentage NUMERIC NOT NULL,
+	input NUMERIC NOT NULL,
+	output NUMERIC NOT NULL,
+	ups_load NUMERIC NOT NULL,
+	description TEXT
+);
+
+CREATE TABLE DHT (
+	id SERIAL PRIMARY KEY, 
+	timest TIMESTAMP,
+	temperature NUMERIC NOT NULL,
+	humidite NUMERIC NOT NULL
+);
+
+CREATE TABLE Mouvement (
+	id SERIAL PRIMARY KEY,
+	timest TIMESTAMP,
+	mouvement  BOOLEAN NOT NULL
+);
