@@ -9,20 +9,19 @@ datasource db {
 
 model dht {
   id          Int       @id @default(autoincrement())
-  timest      DateTime? @db.Timestamp(6)
+  timestmp    DateTime? @default(now()) @db.Timestamp(6)
   temperature Decimal   @db.Decimal
   humidite    Decimal   @db.Decimal
 }
 
 model mouvement {
-  id        Int       @id @default(autoincrement())
-  timest    DateTime? @db.Timestamp(6)
-  mouvement Boolean
+  id       Int       @id @default(autoincrement())
+  timestmp DateTime? @default(now()) @db.Timestamp(6)
 }
 
 model ups {
   id                  Int       @id @default(autoincrement())
-  timest              DateTime? @db.Timestamp(6)
+  timestmp            DateTime? @default(now()) @db.Timestamp(6)
   battery_pourcentage Decimal   @db.Decimal
   input               Decimal   @db.Decimal
   output              Decimal   @db.Decimal

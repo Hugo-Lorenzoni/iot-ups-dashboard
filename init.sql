@@ -1,6 +1,6 @@
-CREATE TABLE UPS (
+CREATE TABLE ups (
 	id SERIAL PRIMARY KEY,
-	timest TIMESTAMP,
+	timestmp TIMESTAMP DEFAULT NOW(),
 	battery_pourcentage NUMERIC NOT NULL,
 	input NUMERIC NOT NULL,
 	output NUMERIC NOT NULL,
@@ -8,15 +8,14 @@ CREATE TABLE UPS (
 	description TEXT
 );
 
-CREATE TABLE DHT (
+CREATE TABLE dht (
 	id SERIAL PRIMARY KEY, 
-	timest TIMESTAMP,
+	timestmp TIMESTAMP DEFAULT NOW(),
 	temperature NUMERIC NOT NULL,
 	humidite NUMERIC NOT NULL
 );
 
-CREATE TABLE Mouvement (
+CREATE TABLE mouvement (
 	id SERIAL PRIMARY KEY,
-	timest TIMESTAMP,
-	mouvement  BOOLEAN NOT NULL
+	timestmp TIMESTAMP DEFAULT NOW()
 );
