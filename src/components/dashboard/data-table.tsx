@@ -46,7 +46,6 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      <div className="mx-6 mb-6">Text</div>
       <ScrollArea className="rounded-md border mx-6 mb-6">
         <div>
           <Table>
