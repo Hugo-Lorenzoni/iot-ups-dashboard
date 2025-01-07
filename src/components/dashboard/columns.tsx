@@ -3,6 +3,8 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { Button } from "../ui/button";
 import { ArrowUpDown, Cctv } from "lucide-react";
+import { downloadVideo } from "@/app/actions";
+// import { downloadVideo } from "@/utils/minio"; // Make sure to implement this utility function
 
 export type Log = {
   id: number;
@@ -62,12 +64,32 @@ export const columns: ColumnDef<Log>[] = [
   },
   {
     id: "actions",
-    cell: () => (
-      <div className="text-right">
-        <Button>
-          Regardé l'enregistrement <Cctv />
-        </Button>
-      </div>
-    ),
+    cell: ({ row }) => {
+      const timestamp = row.getValue("timestmp") as Date | null;
+
+      // const handleDownload = async () => {
+      //   if (timestamp) {
+      //     const videoName = `video_${timestamp.toISOString()}`;
+      //     await downloadVideo(videoName);
+      //   }
+      // };
+
+      return (
+        <div className="text-right">
+          <form action={downloadVideo}>
+            <input
+              readOnly
+              type="text"
+              name="timestamp"
+              value={timestamp?.toISOString()}
+              hidden
+            />
+            <Button>
+              Regardé l'enregistrement <Cctv />
+            </Button>
+          </form>
+        </div>
+      );
+    },
   },
 ];

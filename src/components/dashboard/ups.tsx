@@ -52,13 +52,13 @@ export function UPS({ ups }: { ups: UPS }) {
         <CardTitle>UPS</CardTitle>
         <CardDescription>
           <>
-            {new Date().toLocaleDateString(undefined, {
+            {new Date().toLocaleDateString("fr-BE", {
               day: "numeric",
               month: "long",
               year: "numeric",
             })}{" "}
             -{" "}
-            {new Date().toLocaleTimeString(undefined, {
+            {new Date().toLocaleTimeString("fr-BE", {
               hour: "2-digit",
               minute: "2-digit",
               second: "2-digit",
@@ -89,7 +89,13 @@ export function UPS({ ups }: { ups: UPS }) {
                 chartConfig[value as keyof typeof chartConfig]?.label
               }
             />
-            <XAxis dataKey="value" type="number" hide />
+
+            <XAxis
+              dataKey="value"
+              type="number"
+              axisLine={false}
+              tickLine={false}
+            />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
@@ -100,9 +106,6 @@ export function UPS({ ups }: { ups: UPS }) {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 font-medium leading-none">Pas d'alerte</div>
-        <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
-        </div>
       </CardFooter>
     </Card>
   );
