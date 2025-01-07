@@ -2,43 +2,71 @@
 
 import type { ColumnDef } from "@tanstack/react-table";
 import { Button } from "../ui/button";
+import { ArrowUpDown, Cctv } from "lucide-react";
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
+export type Log = {
+  id: number;
+  timestmp: Date | null;
 };
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Log>[] = [
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "id",
+    header: "#",
   },
   {
-    accessorKey: "email",
-    header: "Email",
-  },
-  {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
+    accessorKey: "timestmp",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Time
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
-      const amount = Number.parseFloat(row.getValue("amount"));
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
+      const timestamp = row.getValue("timestmp") as Date | null;
 
-      return <div className="text-right font-medium">{formatted}</div>;
+      if (!timestamp) {
+        return <div>No data</div>;
+      }
+
+      return <div>{timestamp.toISOString()}</div>;
+    },
+  },
+  {
+    accessorKey: "timestmp2",
+    header: "Description",
+    cell: ({ row }) => {
+      const timestamp = row.getValue("timestmp") as Date | null;
+
+      if (!timestamp) {
+        return <div className="text-right font-medium">No data</div>;
+      }
+
+      const date = timestamp.toLocaleDateString("fr-BE", {
+        day: "numeric",
+        month: "long",
+      });
+      const time = timestamp.toLocaleTimeString("fr-BE");
+
+      return (
+        <div className="font-medium">
+          Un mouvement a été détecté le {date} à {time}
+        </div>
+      );
     },
   },
   {
     id: "actions",
-    cell: ({ row }) => (
+    cell: () => (
       <div className="text-right">
-        <Button>View</Button>
+        <Button>
+          Regardé l'enregistrement <Cctv />
+        </Button>
       </div>
     ),
   },
