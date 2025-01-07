@@ -16,7 +16,7 @@ export async function downloadVideo(
     const videoName = `video_${timestring
       .split(".")[0]
       .replace("T", "_")
-      .replace("-", "")
+      .replaceAll("-", "")
       .replaceAll(":", "")}.avi`;
     console.log(videoName);
     const url: string = await minioClient.presignedGetObject(
