@@ -67,16 +67,18 @@ export const columns: ColumnDef<Log>[] = [
     cell: ({ row }) => {
       const timestamp = row.getValue("timestmp") as Date | null;
 
-      // const handleDownload = async () => {
-      //   if (timestamp) {
-      //     const videoName = `video_${timestamp.toISOString()}`;
-      //     await downloadVideo(videoName);
-      //   }
-      // };
+      const handleDownload = async (formData: FormData) => {
+        console.log(formData);
+
+        const url = await downloadVideo(formData);
+        console.log(url);
+
+        window.open(url, "_blank");
+      };
 
       return (
         <div className="text-right">
-          <form action={downloadVideo}>
+          <form action={handleDownload}>
             <input
               readOnly
               type="text"

@@ -2,7 +2,9 @@
 
 import minioClient from "@/lib/minio";
 
-export async function downloadVideo(formData: FormData): Promise<void> {
+export async function downloadVideo(
+  formData: FormData
+): Promise<string | undefined> {
   console.log("downloadVideo");
   const timestamp = formData.get("timestamp") as string | null;
   if (timestamp) {
@@ -18,5 +20,6 @@ export async function downloadVideo(formData: FormData): Promise<void> {
       videoName,
       24 * 60 * 60
     );
+    return url;
   }
 }
