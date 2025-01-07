@@ -50,7 +50,7 @@ export function UPS({ ups }: { ups: UPS }) {
     <Card className="flex flex-col">
       <CardHeader>
         <CardTitle>UPS</CardTitle>
-        <CardDescription>
+        {/* <CardDescription>
           <>
             {new Date().toLocaleDateString("fr-BE", {
               day: "numeric",
@@ -64,7 +64,7 @@ export function UPS({ ups }: { ups: UPS }) {
               second: "2-digit",
             })}
           </>
-        </CardDescription>
+        </CardDescription> */}
       </CardHeader>
       <CardContent className="grow">
         <ChartContainer
