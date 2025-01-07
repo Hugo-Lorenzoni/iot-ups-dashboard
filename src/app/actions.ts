@@ -8,12 +8,15 @@ export async function downloadVideo(
   console.log("downloadVideo");
   const timestamp = formData.get("timestamp") as string | null;
   if (timestamp) {
-    const videoName = `video_${timestamp
-      .replaceAll("-", "")
+    const time = new Date(timestamp);
+    time.setHours(time.getHours() + 1);
+    console.log(time);
+    const timestring = time.toISOString();
+
+    const videoName = `video_${timestring
+      .split(".")[0]
       .replace("T", "_")
-      .replaceAll(".", "")
-      .replaceAll(":", "")
-      .substring(0, 15)}.avi`;
+      .replaceAll(":", "")}.avi`;
     console.log(videoName);
     const url: string = await minioClient.presignedGetObject(
       "iot-bucket",
