@@ -12,6 +12,9 @@ import { ScanEye } from "lucide-react";
 
 import { columns, type Log } from "./columns";
 import { DataTable } from "./data-table";
+import { useQuery } from "@tanstack/react-query";
+import { getLogs } from "@/app/actions";
+import { REFETCH_INTERVAL } from "@/utils/constants";
 
 function format(input: Date): string {
   return input
@@ -24,7 +27,17 @@ function format(input: Date): string {
     .join(" "); // Join the words back into a single string
 }
 
-export function Logs({ logs }: { logs: Log[] }) {
+export function Logs() {
+  const { data: logs } = useQuery({
+    queryKey: ["logs"],
+    queryFn: getLogs,
+    refetchInterval: REFETCH_INTERVAL,
+  });
+
+  if (!logs) {
+    return null;
+  }
+
   const oldestLog = logs[logs.length - 1].timestmp;
   const newestLog = logs[0].timestmp;
 

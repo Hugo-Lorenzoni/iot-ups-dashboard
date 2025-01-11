@@ -17,6 +17,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { useQuery } from "@tanstack/react-query";
+import { getUps } from "@/app/actions";
+import { REFETCH_INTERVAL } from "@/utils/constants";
 
 type UPS = {
   label: string;
@@ -45,7 +48,17 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function UPS({ ups }: { ups: UPS }) {
+export function UPS() {
+  const { data: ups } = useQuery({
+    queryKey: ["ups"],
+    queryFn: getUps,
+    refetchInterval: REFETCH_INTERVAL,
+  });
+
+  if (!ups) {
+    return null;
+  }
+
   return (
     <Card className="flex flex-col">
       <CardHeader>

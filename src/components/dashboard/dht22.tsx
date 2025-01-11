@@ -31,6 +31,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { useQuery } from "@tanstack/react-query";
+import { getDht } from "@/app/actions";
+import { REFETCH_INTERVAL } from "@/utils/constants";
 
 const chartConfig = {
   temperature: {
@@ -64,7 +67,17 @@ function format(input: Date): string {
     .join(" "); // Join the words back into a single string
 }
 
-export function DHT22({ dht }: { dht: DHT }) {
+export function DHT22() {
+  const { data: dht } = useQuery({
+    queryKey: ["dht"],
+    queryFn: getDht,
+    refetchInterval: REFETCH_INTERVAL,
+  });
+
+  if (!dht) {
+    return null;
+  }
+
   const oldestData = dht[dht.length - 1].timestamp;
   const newestData = dht[0].timestamp;
 
