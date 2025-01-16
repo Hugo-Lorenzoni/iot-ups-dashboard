@@ -47,6 +47,7 @@ export async function getDht() {
     orderBy: {
       timestmp: "desc",
     },
+    take: 10,
   });
   // convert decimal to number
   const dht = dhtData.map((d) => {
@@ -57,7 +58,7 @@ export async function getDht() {
     };
   });
 
-  return dht;
+  return dht.toReversed();
 }
 
 export async function getUps() {

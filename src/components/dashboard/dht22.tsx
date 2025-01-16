@@ -49,12 +49,6 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-type DHT = {
-  temperature: number;
-  humidite: number;
-  timestamp: Date | null;
-}[];
-
 function format(input: Date): string {
   return input
     .toLocaleTimeString("fr-BE", {
@@ -110,10 +104,12 @@ export function DHT22() {
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="timestamp"
-              tickLine={false}
+              tickCount={4}
+              tickLine={true}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => {
+              interval="equidistantPreserveStart"
+              tickFormatter={(value, index) => {
                 const date = value as Date;
                 return date.toLocaleTimeString("fr-BE", {
                   hour: "2-digit",
@@ -144,7 +140,7 @@ export function DHT22() {
               fill="var(--color-temperature)"
               fillOpacity={0.4}
               stroke="var(--color-temperature)"
-              stackId="a"
+              stackId="b"
             />
             <LabelList dataKey="timestamp" position="top" />
           </AreaChart>
